@@ -7,7 +7,7 @@ A brief description of what this project does and who it's for.
 - [Installation](#installation)
 - [Usage](#usage)
 
-- [Acknowledgements](#acknowledgements)
+- [Contact](#contact)
 
 ## Installation
 
