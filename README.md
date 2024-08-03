@@ -1,6 +1,14 @@
-# AMP-Cliff-generation
+# AMPCliff: quantitative definition and benchmarking of activity cliffs in antimicrobial peptides
 
-Activity cliff (AC) is a phenomenon that pairs of similar compounds that only differ by a small structural modification but exhibit a large difference in their binding affinity for a given target. The AC of small molecules has been extensively investigated but limited knowledge is accumulated about the AC phenomenon in peptides with canonical amino acids. This study introduces a quantitative definition and benchmarking framework AMPCliff for the AC phenomenon in antimicrobial peptides (AMPs). A comprehensive analysis of the existing AMP dataset reveals a significant prevalence of AC within AMPs. AMPCliff quantifies the activities of AMPs by the metric minimum inhibitory concentration (MIC), and defines 0.9 as the minimum threshold for the normalized BLOSUM62 similarity score between a pair of aligned peptides with at least two-fold MIC changes. This study establishes a benchmark dataset of paired AMPs in Staphylococcus aureus from the publicly available AMP dataset GRAMPA, and conducts a rigorous procedure to evaluate various AMP AC prediction models, including nine machine learning, four deep learning algorithms, four masked language models, and four generative language models. Our analysis reveals that these models are capable of detecting AMP AC events and the pre-trained protein language ESM2 model demonstrates superior performance across the evaluations. The predictive performance of AMP activity cliffs remains to be further improved, considering that ESM2 only achieves the Spearman=0.50 of AC with 2-fold change. Source code and additional resources are available at https://github.com/Kewei2023/AMPCliff-generation
+Activity cliff (AC) is a phenomenon that two molecules differ by a small structural alternation but exhibit significantly changed biochemical activities. The AC in small molecules has been extensively investigated but limited knowledge is accumulated about the AC phenomenon in peptides with canonical amino acids. This study introduces a quantitative definition and benchmarking framework AMPCliff for the AC phenomenon in antimicrobial peptides (AMPs) composed by canonical amino acids. A comprehensive analysis of the existing AMP datasets reveals the significant prevalence of AC within AMPs. AMPCliff quantifies the AC between two peptides with the normalized BLOSUM62 similarity score in their alignment at least 0.9, and two-fold or larger minimum inhibitory concentration (MIC) change. This study establishes a benchmark dataset of paired AMPs in Staphylococcus aureus from the publicly available AMP dataset GRAMPA, and conducts a rigorous procedure to evaluate various AMP AC prediction models, including nine machine learning, four deep learning algorithms, four masked language models, and four generative language models. The experimental data reveals that these models are capable of detecting AMP AC events and the pre-trained protein language ESM2 model demonstrates superior performance across the comparative evaluations. The predictive model based on ESM2 with 33 layers only achieves the Spearman correlation coefficient (SCC) 0.50 for the regression task of the MIC values on the benchmark dataset. So the predictive performance of AMP AC remains to be further improved. Source code and additional resources are available at https://www.healthinformaticslab.org/supp/ or https://github.com/Kewei2023/AMPCliff-generation.
+
+
+## Versions
+
+Kewei Li (kwbb1997@gmail.com) or Fengfeng Zhou (FengfengZhou@gmail.com)
+
+Version 1.00
+
 
 ## Table of Contents
 
@@ -41,3 +49,8 @@ the results will be saved in `./data/`
 
 ## Contact 
 please contact kwbb1997@gmail.com for any question
+
+## Update
+
+2024-07-11
+

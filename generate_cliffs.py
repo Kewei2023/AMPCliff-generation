@@ -288,7 +288,7 @@ def main():
     sequence_pairs = list(combinations(data.iterrows(), 2))
     
     # setting the size of thread pool
-    pool_size = 128  # or adjust by demand
+    # pool_size = 128  # or adjust by demand
     
     new_rows = []
     
@@ -299,12 +299,14 @@ def main():
         for future in as_completed(future_to_pair):
             try:
                 result = future.result()
-                new_rows.append(result)
+                if result is not None:
+                  new_rows.append(result)
             except Exception as e:
                 print(f"Exception in processing pair: {future_to_pair[future]}, error: {e}")
     # '''
     # save result
     ac_sequences = pd.DataFrame(new_rows).drop_duplicates(subset=None, keep='first', inplace=False)
+    ipdb.set_trace()
     ac_sequences.to_csv(name.replace('.csv',f'_acpairs_{condition}_{diff}-fold.csv'), index=False)
     print(f'Finally saved {len(new_rows)} pairs')
 
