@@ -22,7 +22,7 @@ Version 1.00
 ```
 git clone git@github.com:Kewei2023/AMP-Cliff-generation.git
 
-cd AMP-Cliff-generation
+cd AMPCliff-generation
 
 conda create -f environment.yaml
 conda activate AMPCliff
