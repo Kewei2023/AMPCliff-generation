@@ -20,7 +20,7 @@ Version 1.00
 ## Installation
 
 ```
-git clone git@github.com:Kewei2023/AMP-Cliff-generation.git
+git clone git@github.com:Kewei2023/AMPCliff-generation.git
 
 cd AMPCliff-generation
 
