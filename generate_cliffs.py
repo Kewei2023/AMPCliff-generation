@@ -167,7 +167,7 @@ def TanimotoSimilarity(seq1, seq2):
 
 
 
-def process_sequence_pair(seq_pair, condition, diff=5):
+def process_sequence_pair(seq_pair, condition, diff=5,similarity=0.9):
     idx1, seq1 = seq_pair[0]
     idx2, seq2 = seq_pair[1]
     
@@ -232,13 +232,13 @@ def process_sequence_pair(seq_pair, condition, diff=5):
       else:
         if condition == 'levenstein aligned' and leven_dist != 1: 
           save_flag = False
-        if condition == 'blosum62 average' and avg_sim < 0.9: 
+        if condition == 'blosum62 average' and avg_sim < similarity:# 0.9 
           save_flag = False 
-        if condition == 'tanimoto average' and sim < 0.9: 
+        if condition == 'tanimoto average' and sim < similarity:# 0.9 
           save_flag = False 
         if condition == 'levenstein' and lev != 1: 
           save_flag = False 
-        if condition == 'sequence identity' and seq_id < 0.9: 
+        if condition == 'sequence identity' and seq_id < similarity: 
           save_flag = False 
         
       if save_flag:
@@ -283,18 +283,18 @@ def main():
       sys.exit(1) 
       
     diff = args.diff
-    
+    similarity = args.similarity
     # create sequence pairs
     sequence_pairs = list(combinations(data.iterrows(), 2))
     
     # setting the size of thread pool
-    # pool_size = 128  # or adjust by demand
+    pool_size = 128  # or adjust by demand
     
     new_rows = []
     
     with ProcessPoolExecutor(max_workers=cpu_count()) as executor:
         # batch submit sequence pairs
-        future_to_pair = {executor.submit(process_sequence_pair, pair, condition, diff): pair for pair in sequence_pairs}
+        future_to_pair = {executor.submit(process_sequence_pair, pair, condition, diff,similarity): pair for pair in sequence_pairs}
         
         for future in as_completed(future_to_pair):
             try:
@@ -306,8 +306,7 @@ def main():
     # '''
     # save result
     ac_sequences = pd.DataFrame(new_rows).drop_duplicates(subset=None, keep='first', inplace=False)
-    ipdb.set_trace()
-    ac_sequences.to_csv(name.replace('.csv',f'_acpairs_{condition}_{diff}-fold.csv'), index=False)
+    ac_sequences.to_csv(name.replace('.csv',f'_acpairs_{condition}_{diff}-fold_sim-{similarity}.csv'), index=False)
     print(f'Finally saved {len(new_rows)} pairs')
 
 def parse_args():
@@ -315,7 +314,7 @@ def parse_args():
     parser.add_argument('--condition','-c', type=str,default='blosum62 average', help='The condition to filter AMP-Cliff, supporting "levenstein aligned","levenstein","blosum62 average","tanimoto average","sequence identity","all"')
     parser.add_argument('--data','-d', type=str, default='./data/grampa_s_aureus_7_25.csv', help='Path to the data CSV file')
     parser.add_argument('--diff','-f', type=int, default=5, help='dilution difference,should be int like: 2,3,4,5')
-    
+    parser.add_argument('--threshold','-t', type=float, default=0.9, help='similarity threshold of blosum62 average and tanimoto average,should be float like: 0.85,0.9,0.95')
     return parser.parse_args()
 if __name__=='__main__':
     main()

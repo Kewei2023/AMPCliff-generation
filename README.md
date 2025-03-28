@@ -30,19 +30,21 @@ conda activate AMPCliff
 
 ## Usage
 ### Generate AMP-Cliff pairs
-**condition:** `blosum62 average` by default, supporting `levenstein aligned`,`levenstein`,`blosum62 average`,`tanimoto average`,`sequence identity`,`all`.
+- **condition:** `blosum62 average` by default, supporting `levenstein aligned`,`levenstein`,`blosum62 average`,`tanimoto average`,`sequence identity`,`all`.
 
 
-**diff:** dilution difference,`5` by default, should be int like: `2`,`3`,`4`,`5`
+- **diff:** dilution difference,`5` by default, should be `int` like: `2`,`3`,`4`,`5`
+
+- **threhsold:** similarity threshold for `blosum62 average` and `tanimoto average`,`0.9` by default, should be `float` like: `0.85`,`0.9`,`0.95`
 ```
-python generate_cliffs.py -d xxx.csv -c "blosum62 average" -f 5
+python generate_cliffs.py -d xxx.csv -c "blosum62 average" -f 5 -t 0.9
 ```
 
 
 ### Data partition
 
 ```
-python data_partition.py -d xxx.csv -p xxx.csv
+python data_partition.py -d xxx.csv -p xxx.csv -t 0.9
 ```
 
 the results will be saved in `./data/`
