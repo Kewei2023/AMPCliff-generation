@@ -283,7 +283,7 @@ def main():
       sys.exit(1) 
       
     diff = args.diff
-    similarity = args.similarity
+    similarity = args.threshold
     # create sequence pairs
     sequence_pairs = list(combinations(data.iterrows(), 2))
     
