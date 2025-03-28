@@ -44,7 +44,7 @@ python generate_cliffs.py -d xxx.csv -c "blosum62 average" -f 5 -t 0.9
 ### Data partition
 
 ```
-python data_partition.py -d xxx.csv -p xxx.csv -t 0.9
+python data_partition.py -d xxx.csv -p xxx.csv -f 5 -t 0.9
 ```
 
 the results will be saved in `./data/`
